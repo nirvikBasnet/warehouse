@@ -41,12 +41,14 @@ fun MainCompose(navController: NavController){
        Column(modifier = Modifier
            .fillMaxSize()
            .padding(it)) {
+           TopMessageBar(modifier = Modifier.background(Color.Green), message = "15/01/24 9:33 AM")
            Column(modifier = Modifier
                .fillMaxSize()
                .weight(3f, true)) {
                Column(modifier = Modifier
                    .fillMaxSize()
                    .weight(2f, true)) {
+
 
                }
                Column(modifier = Modifier
