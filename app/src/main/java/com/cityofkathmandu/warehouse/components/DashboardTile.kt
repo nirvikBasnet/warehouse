@@ -1,5 +1,6 @@
 package com.cityofkathmandu.warehouse.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,10 +21,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.cityofkathmandu.warehouse.navigation.NavigationItem
 
 
 @Composable
-fun DashboardTile(tile : Tile){
+fun DashboardTile(tile : Tile,navController: NavController){
     Surface(
         modifier = Modifier
             .height(120.dp)
@@ -33,7 +37,10 @@ fun DashboardTile(tile : Tile){
         shape = RoundedCornerShape(20.dp)
     ) {
         Column(modifier = Modifier
-            .padding(10.dp),
+            .padding(10.dp)
+            .clickable {
+                navController.navigate(tile.route)
+            },
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly) {
 
@@ -58,5 +65,5 @@ data class Tile(
 @Preview
 fun DashboardTilePreview(){
     val tile = Tile("Receive", "Receive", Icons.Default.List, "ReceiveScreen")
-    DashboardTile(tile)
+    DashboardTile(tile, rememberNavController())
 }

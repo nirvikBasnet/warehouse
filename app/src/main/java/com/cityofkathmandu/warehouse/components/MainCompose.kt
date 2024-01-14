@@ -1,9 +1,15 @@
 package com.cityofkathmandu.warehouse.components
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -11,43 +17,78 @@ import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.cityofkathmandu.warehouse.navigation.NavigationItem
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainCompose(){
+fun MainCompose(navController: NavController){
 
-    Column {
-        firstColumn()
-        secondColumn()
-    }
+   Scaffold(
+       topBar = { CenterAlignedTopAppBar(title = { Text(text = "Warehouse") }) },
+   ) {
+       Column(modifier = Modifier
+           .fillMaxSize()
+           .padding(it)) {
+           Column(modifier = Modifier
+               .fillMaxSize()
+               .weight(3f, true)) {
+               Column(modifier = Modifier
+                   .fillMaxSize()
+                   .weight(2f, true)) {
+
+               }
+               Column(modifier = Modifier
+                   .fillMaxSize()
+                   .weight(1f, true)
+                   .padding(5.dp)) {
+                   firstColumn(navController)
+                   secondColumn(navController)
+               }
+           }
+
+       }
+
+   }
+
+
 
 }
 
 @Composable
-fun firstColumn(){
+fun firstColumn(navController: NavController){
     Row (
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
-        DashboardTile(tile =Tile("Receive", "Receive", Icons.Default.ArrowForward, "ReceiveScreen") )
-        DashboardTile(tile =Tile("Return", "Return", Icons.Default.ArrowBack, "ReceiveScreen") )
-        DashboardTile(tile =Tile("Pickup", "Pickup", Icons.Default.ShoppingCart, "ReceiveScreen") )
+        DashboardTile(tile =Tile("Receive", "Receive", Icons.Default.ArrowForward, NavigationItem.Receive.route),navController )
+        DashboardTile(tile =Tile("Return", "Return", Icons.Default.ArrowBack, NavigationItem.Return.route), navController )
+        DashboardTile(tile =Tile("Pickup", "Pickup", Icons.Default.ShoppingCart, NavigationItem.Pickup.route), navController )
     }
 
     }
 
 
 @Composable
-fun secondColumn(){
+fun secondColumn(navController: NavController){
     Row (
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ){
-        DashboardTile(tile =Tile("Move", "Move", Icons.Default.ExitToApp, "ReceiveScreen") )
-        DashboardTile(tile =Tile("Cycle Count", "Cycle Count", Icons.Default.List, "ReceiveScreen") )
-        DashboardTile(tile =Tile("More", "More", Icons.Default.MoreVert, "ReceiveScreen") )
+        DashboardTile(tile =Tile("Move", "Move", Icons.Default.ExitToApp, NavigationItem.Move.route) , navController)
+        DashboardTile(tile =Tile("Cycle Count", "Cycle Count", Icons.Default.List, NavigationItem.CycleCount.route) , navController)
+        DashboardTile(tile =Tile("More", "More", Icons.Default.MoreVert, NavigationItem.More.route), navController )
     }
 
 }
@@ -55,5 +96,5 @@ fun secondColumn(){
 @Composable
 @Preview
 fun MainComposePreview(){
-    MainCompose()
+    MainCompose(navController = rememberNavController())
 }
