@@ -76,6 +76,8 @@ dependencies {
 
     //compose navigation
     implementation("androidx.navigation:navigation-compose:$nav_version")
+    //navigation testing
+    implementation("androidx.navigation:navigation-testing:2.7.6")
 
     //dagger hilt for dependency injection
     implementation("com.google.dagger:hilt-android:$hilt_version")

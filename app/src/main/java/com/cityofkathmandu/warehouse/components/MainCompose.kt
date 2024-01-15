@@ -53,7 +53,6 @@ fun MainCompose(navController: NavController){
                    .weight(2f, true)) {
                    Image(modifier = Modifier.fillMaxSize(), painter = painterResource(id = R.drawable.fork_lift_logo),
                        contentDescription = "Warehouse Image" )
-
                }
                Column(modifier = Modifier
                    .fillMaxSize()
